@@ -1,6 +1,6 @@
 # Snow-It-All
 
-My Zackathon 2025 project: a chatbot that transforms negative energy into motivation
+My Zackathon 2025 project: a chatbot that transforms negative energy into motivation.
 
 ## Running Snow-It-All
 
