@@ -32,9 +32,7 @@ def chat_with_llm(user_message: str):
 
     except requests.exceptions.RequestException as e:
         print(f"Together AI request failed: {e}")
-        return (
-            "Unfortunately, your request to Rabbi Snow has errored. Please try again."
-        )
+        return "Unfortunately, your request to Rabbi Snow has errored because your message was too idiotic. Please try again, and use your brain this time."
 
     except Exception as e:
         print(f"Unexpected error: {e}")
