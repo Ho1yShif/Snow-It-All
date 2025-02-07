@@ -12,10 +12,9 @@ MODEL_NAME = "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo"
 
 client = Together(api_key=TOGETHER_API_KEY)
 
-# Maintain conversation history
 conversation_history = [{"role": "system", "content": SYSTEM_PROMPT}]
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static")
 
 
 def chat_with_llm(user_message: str):

@@ -4,41 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat with Rabbi Snow</title>
-	<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='snow_favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Roboto, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background-color: #b3e5fc;  /* Light blue background */
+            position: relative;
+            overflow: hidden;
         }
         #chatBox {
             width: 400px;
             height: 300px;
-            border: 1px solid #ccc;
+            border: 1px solid black;
             padding: 10px;
             overflow-y: auto;
-            background: white;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        #inputContainer {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            z-index: 2; /* Ensures input container is above snowflakes */
         }
         #userInput {
             width: 300px;
             padding: 10px;
-            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid black;
+            background: rgba(255, 255, 255, 0.9);
         }
         button {
             padding: 10px;
             margin-left: 5px;
             cursor: pointer;
+            background-color: white;
+            color: black;
+            border: solid black;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #333;
         }
         .typing {
             font-style: italic;
             color: darkgray;
         }
+
+        /* Snow drop CSS */
+        .snowdrop {
+            position: absolute;
+            top: -10px;
+            width: 10px;  /* Size of the snow drop */
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            z-index: 1; /* Snowflakes fall behind the input element */
+            animation: fall 5s linear infinite;
+        }
+
+        /* Falling animation */
+        @keyframes fall {
+            0% {
+                transform: translateY(0);  /* Start from top */
+            }
+            100% {
+                transform: translateY(100vh);  /* Fall to bottom */
+            }
+        }
     </style>
     <script>
+        // Function to send message and handle chat interactions
         async function sendMessage() {
             let userInput = document.getElementById("userInput").value.trim();
             let chatBox = document.getElementById("chatBox");
@@ -48,7 +92,6 @@
             chatBox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
             document.getElementById("userInput").value = "";
 
-            // Show "Rabbi Snow is typing..." inside the chat box
             let typingIndicator = document.createElement("p");
             typingIndicator.className = "typing";
             typingIndicator.id = "typingIndicator";
@@ -64,7 +107,6 @@
 
             let data = await response.json();
 
-            // Remove typing indicator when response arrives
             typingIndicator.remove();
 
             if (data.response) {
@@ -72,13 +114,34 @@
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
         }
+
+        // Function to create and animate snow drops with delay
+        function createSnowDrops() {
+            for (let i = 0; i < 80; i++) {
+                let snowdrop = document.createElement("div");
+                snowdrop.classList.add("snowdrop");
+                snowdrop.style.left = Math.random() * 100 + "vw";  // Random horizontal position
+                snowdrop.style.animationDuration = Math.random() * 5 + 5 + "s";  // Randomize speed
+                snowdrop.style.animationDelay = Math.random() * 5 + "s";  // Randomize delay
+
+                // Slight delay for creating each snowflake for staggered effect
+                setTimeout(function() {
+                    document.body.appendChild(snowdrop);
+                }, Math.random() * 1000);  // Delay for snowflake creation
+            }
+        }
+
+        // Call the snow drops creation function when the page loads
+        window.onload = createSnowDrops;
     </script>
 </head>
 <body>
-    <h1>Snow-It-All: Chat with Rabbi Snow</h1>
-	<h2>He'll shame you into completing any task :)</h2>
+    <h1>Snow-It-All</h1>
+    <h2> Chat with Rabbi Snow! <br> He'll shame you into completing any task :)</h2>
     <div id="chatBox"></div>
-    <input type="text" id="userInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter') sendMessage()">
-    <button onclick="sendMessage()">Send</button>
+    <div id="inputContainer">
+        <input type="text" id="userInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter') sendMessage()">
+        <button onclick="sendMessage()">Send</button>
+    </div>
 </body>
 </html>
