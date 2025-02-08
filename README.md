@@ -2,6 +2,8 @@
 
 My Zackathon 2025 project: a chatbot that transforms negative energy into motivation.
 
+## [Presentation](https://docs.google.com/presentation/d/1keW7NyoTF-HZtHlXJzlhkUlBpfOyG7t9466k-EC8AHA/edit?usp=sharing)
+
 ## Running Snow-It-All
 
 1. Clone the repository and install requirements.
