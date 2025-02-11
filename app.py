@@ -1,5 +1,4 @@
 import os
-import requests
 from flask import Flask, render_template, request, jsonify, send_from_directory
 from dotenv import load_dotenv
 from together import Together
@@ -29,15 +28,9 @@ def chat_with_llm(user_message: str):
         conversation_history.append({"role": "assistant", "content": ai_message})
         return ai_message
 
-    except requests.exceptions.RequestException as e:
-        print(f"Together AI request failed: {e}")
-        return "Unfortunately, your request to Rabbi Snow has errored because your message was too idiotic. Please try again, and use your brain this time."
-
     except Exception as e:
         print(f"Unexpected error: {e}")
-        return (
-            "Unfortunately, your request to Rabbi Snow has errored. Please try again."
-        )
+        return "Unfortunately, your request to Rabbi Snow has errored because you didn't try hard enough. Please try harder, and use your brain next time."
 
 
 @app.route("/")
