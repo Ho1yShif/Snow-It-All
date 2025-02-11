@@ -13,7 +13,12 @@ client = Together(api_key=TOGETHER_API_KEY)
 
 conversation_history = [{"role": "system", "content": SYSTEM_PROMPT}]
 
-app = Flask(__name__, static_folder="static")
+app = Flask(__name__)
+
+
+@app.route("/")
+def home():
+    return render_template("index.html")  # Ensure this matches your template filename
 
 
 def chat_with_llm(user_message: str):

@@ -1,0 +1,102 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #b3e5fc, #81d4fa);
+    overflow: hidden;
+    margin: 0;
+    position: relative;
+}
+
+#snowContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.snowdrop {
+    position: absolute;
+    top: -10px;
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    width: 420px;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #0277bd;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+#chatBox {
+    width: 95%;
+    height: 300px;
+    border: 1px solid #ccc;
+    padding: 12px;
+    overflow-y: auto;
+    background: #f9f9f9;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#inputContainer {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+#userInput {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.95);
+    font-size: 14px;
+}
+
+button {
+    padding: 10px 15px;
+    cursor: pointer;
+    background-color: #0277bd;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #01579b;
+}
