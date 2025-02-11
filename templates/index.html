@@ -31,7 +31,7 @@
             display: flex;
             align-items: center;
             margin-top: 10px;
-            z-index: 2; /* Ensures input container is above snowflakes */
+            z-index: 2;
         }
         #userInput {
             width: 300px;
@@ -61,7 +61,7 @@
         .snowdrop {
             position: absolute;
             top: -10px;
-            width: 10px;  /* Size of the snow drop */
+            width: 10px;
             height: 10px;
             background-color: white;
             border-radius: 50%;
@@ -72,10 +72,10 @@
         /* Falling animation */
         @keyframes fall {
             0% {
-                transform: translateY(0);  /* Start from top */
+                transform: translateY(0);
             }
             100% {
-                transform: translateY(100vh);  /* Fall to bottom */
+                transform: translateY(100vh);
             }
         }
     </style>
