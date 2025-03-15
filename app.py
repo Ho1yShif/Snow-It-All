@@ -1,4 +1,5 @@
 import os
+import re
 from flask import Flask, render_template, request, jsonify
 from dotenv import load_dotenv
 from together import Together
@@ -43,14 +44,21 @@ def index():
     return render_template("index.html")
 
 
+def format_response(text):
+    sentences = re.split(r'(?<=[.!?])\s+', text)
+    paragraphs = [' '.join(sentences[i:i+3]) for i in range(0, len(sentences), 3)]
+    return '\n\n'.join(paragraphs).replace('\n', '<br>')
+
 @app.route("/chat", methods=["POST"])
 def chat():
     user_message = request.json.get("message", "")
     if not user_message:
         return jsonify({"error": "Empty message"}), 400
+    
     ai_response = chat_with_llm(user_message)
-    return jsonify({"response": ai_response})
-
+    formatted_response = format_response(ai_response)
+    
+    return jsonify({"response": formatted_response})
 
 @app.errorhandler(404)
 def page_not_found(e):
